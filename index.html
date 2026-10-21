@@ -41,17 +41,19 @@
             min-height: 100vh;
         }
 
-        /* Header & Logo */
+        /* Header & Logo with Printed Packaging Image */
         header {
-            background: linear-gradient(135deg, rgba(15, 118, 110, 0.95), rgba(2, 132, 199, 0.95)),
-                        url('https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.88), rgba(2, 132, 199, 0.85)),
+                        url('https://images.unsplash.com/photo-1607344645866-009c320c5ab8?auto=format&fit=crop&w=1600&q=80');
             background-blend-mode: overlay;
             background-size: cover;
+            background-position: center;
             color: white;
-            padding: 24px 20px 20px;
+            padding: 28px 20px 24px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            border-bottom: 3px solid #d97706;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            border-bottom: 4px solid #d97706;
+            position: relative;
         }
 
         .logo-container {
@@ -62,37 +64,39 @@
 
         .brand-logo-text {
             font-family: 'Bodoni Moda', serif;
-            font-size: 2.5rem;
+            font-size: 2.6rem;
             font-weight: 800;
             letter-spacing: 3px;
             color: #ebd181;
-            text-shadow: 1px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 1px 2px 5px rgba(0,0,0,0.6);
             line-height: 1;
             text-transform: uppercase;
         }
 
         .brand-subtext {
             font-family: 'Sarabun', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             font-weight: 600;
             letter-spacing: 4px;
             color: #ffffff;
             margin-top: 4px;
             text-transform: uppercase;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
         }
 
         .header-title {
-            font-size: 1.5rem;
+            font-size: 1.55rem;
             font-weight: 700;
             margin-top: 10px;
             color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
         }
 
         .header-subtitle {
             font-size: 1.05rem;
             color: #e0f2fe;
             font-weight: 500;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
         }
 
         /* Navigation Pills */
@@ -347,3 +351,717 @@
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
+
+        th {
+            background: var(--teal-primary);
+            color: white;
+            text-align: left;
+            padding: 12px;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .badge-dept {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: #dc2626;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-delete:hover {
+            background: #fca5a5;
+            color: #991b1b;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+            background: rgba(255,255,255,0.7);
+            padding: 10px 14px;
+            border-radius: 12px;
+        }
+
+        .filter-bar select, .filter-bar input {
+            padding: 8px 12px;
+            font-size: 0.88rem;
+        }
+
+        .export-btn {
+            background: #16a34a;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: auto;
+        }
+
+        .export-btn:hover {
+            background: #15803d;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container">
+            <div class="brand-logo-text">Kim Pai</div>
+            <div class="brand-subtext">Printing & Packaging</div>
+        </div>
+        <div class="header-title">รายงานผลิตภัณฑ์ที่ไม่เป็นไปตามข้อกำหนด</div>
+        <div class="header-subtitle">เหรียญทองการพิมพ์ (WG6)</div>
+    </header>
+
+    <!-- Nav Bar -->
+    <div class="nav-wrapper">
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="switchTab('dashboard')">
+                <i class="fa-solid fa-chart-pie"></i> หน้าหลัก
+            </button>
+            <button class="nav-btn" onclick="switchTab('report')">
+                <i class="fa-solid fa-file-circle-plus"></i> แจ้งปัญหา
+            </button>
+            <button class="nav-btn" onclick="switchTab('history')">
+                <i class="fa-solid fa-clock-rotate-left"></i> ประวัติรายการ
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- TAB 1: DASHBOARD -->
+        <div id="dashboard" class="tab-content active">
+            
+            <div class="filter-bar">
+                <i class="fa-solid fa-filter" style="color: var(--teal-primary);"></i>
+                <select id="dashYearFilter" onchange="updateDashboard()">
+                    <option value="">-- ทุกปี --</option>
+                    <option value="2026" selected>ปี 2026</option>
+                    <option value="2025">ปี 2025</option>
+                </select>
+
+                <select id="dashMonthFilter" onchange="updateDashboard()">
+                    <option value="">-- ทุกเดือน --</option>
+                    <option value="01">มกราคม</option>
+                    <option value="02">กุมภาพันธ์</option>
+                    <option value="03">มีนาคม</option>
+                    <option value="04">เมษายน</option>
+                    <option value="05">พฤษภาคม</option>
+                    <option value="06">มิถุนายน</option>
+                    <option value="07">กรกฎาคม</option>
+                    <option value="08">สิงหาคม</option>
+                    <option value="09">กันยายน</option>
+                    <option value="10">ตุลาคม</option>
+                    <option value="11">พฤศจิกายน</option>
+                    <option value="12">ธันวาคม</option>
+                </select>
+
+                <select id="dashDeptFilter" onchange="updateDashboard()">
+                    <option value="">-- แสดงทุกแผนก --</option>
+                    <option value="พิมพ์">พิมพ์</option>
+                    <option value="อาบมันรีดเงา">อาบมันรีดเงา</option>
+                    <option value="ปั๊ม">ปั๊ม</option>
+                    <option value="ทั่วไป/แกะกล่อง">ทั่วไป/แกะกล่อง</option>
+                    <option value="ขึ้นรูปกล่อง">ขึ้นรูปกล่อง</option>
+                    <option value="คลังสินค้า">คลังสินค้า</option>
+                </select>
+            </div>
+
+            <!-- KPI Summary Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-title">ปัญหายอดฮิต Top 1</div>
+                    <div class="kpi-value" id="kpiTopProblem">-</div>
+                    <div class="kpi-sub" id="kpiTopProblemCount">0 ครั้ง</div>
+                </div>
+                <div class="kpi-card" style="border-left-color: #0284c7;">
+                    <div class="kpi-title">แผนกที่พบปัญหามากที่สุด</div>
+                    <div class="kpi-value" id="kpiTopDept">-</div>
+                    <div class="kpi-sub" id="kpiTopDeptCount">0 ครั้ง</div>
+                </div>
+                <div class="kpi-card" style="border-left-color: #eab308;">
+                    <div class="kpi-title">เครื่องจักรที่พบปัญหามากที่สุด</div>
+                    <div class="kpi-value" id="kpiTopMachine">-</div>
+                    <div class="kpi-sub" id="kpiTopMachineCount">0 ครั้ง</div>
+                </div>
+                <div class="kpi-card" style="border-left-color: #ec4899;">
+                    <div class="kpi-title">หัวหน้าเครื่องที่พบปัญหาสูงสุด</div>
+                    <div class="kpi-value" id="kpiTopLeader">-</div>
+                    <div class="kpi-sub" id="kpiTopLeaderCount">0 ครั้ง</div>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                <div class="glass-card">
+                    <div class="card-header-title">
+                        <i class="fa-solid fa-gears"></i> เครื่องจักรที่พบปัญหามากที่สุด
+                    </div>
+                    <div class="chart-box">
+                        <canvas id="machineChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div class="card-header-title">
+                        <i class="fa-solid fa-chart-pie"></i> สัดส่วนปัญหาตามแผนก
+                    </div>
+                    <div class="chart-box">
+                        <canvas id="deptChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <div class="card-header-title">
+                    <i class="fa-solid fa-chart-simple"></i> Top 10 รายการปัญหาที่เกิดขึ้นบ่อยที่สุด
+                </div>
+                <div class="chart-box" style="height:320px;">
+                    <canvas id="topProblemChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Leaderboard Table -->
+            <div class="glass-card">
+                <div class="card-header-title">
+                    <i class="fa-solid fa-list-check"></i> สรุปรายชื่อเครื่องจักร & หัวหน้าเครื่อง
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>เครื่องจักร</th>
+                                <th>หัวหน้าเครื่อง</th>
+                                <th>แผนก</th>
+                                <th>จำนวนครั้งที่พบ</th>
+                                <th>ยอดเสียรวม</th>
+                            </tr>
+                        </thead>
+                        <tbody id="machineLeaderboardBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TAB 2: REPORT FORM -->
+        <div id="report" class="tab-content">
+            <div class="glass-card">
+                <div class="card-header-title">
+                    <i class="fa-solid fa-pen-to-square"></i> แบบฟอร์มบันทึกแจ้งปัญหาการผลิต
+                </div>
+                
+                <form id="issueForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-grid">
+                        
+                        <div class="form-group">
+                            <label for="datetimeInput">วันที่ และ เวลา เกิดปัญหา <span style="color:red">*</span></label>
+                            <input type="datetime-local" id="datetimeInput" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="deptSelect">เลือกแผนก <span style="color:red">*</span></label>
+                            <select id="deptSelect" required>
+                                <option value="">-- กรุณาเลือกแผนก --</option>
+                                <option value="พิมพ์">พิมพ์</option>
+                                <option value="อาบมันรีดเงา">อาบมันรีดเงา</option>
+                                <option value="ปั๊ม">ปั๊ม</option>
+                                <option value="ทั่วไป/แกะกล่อง">ทั่วไป/แกะกล่อง</option>
+                                <option value="ขึ้นรูปกล่อง">ขึ้นรูปกล่อง</option>
+                                <option value="คลังสินค้า">คลังสินค้า</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="machineInput">ชื่อ/หมายเลข เครื่องจักร <span style="color:red">*</span></label>
+                            <input type="text" id="machineInput" placeholder="เช่น เครื่องพิมพ์ M1, เครื่องปั๊ม P2" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="leaderInput">หัวหน้าเครื่อง / ผู้รับผิดชอบ <span style="color:red">*</span></label>
+                            <input type="text" id="leaderInput" placeholder="เช่น สมชาย, วิชัย" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jobInput">เลขที่ JOB / ออเดอร์ (ถ้ามี)</label>
+                            <input type="text" id="jobInput" placeholder="เช่น JOB-670102">
+                        </div>
+
+                        <div class="form-group">
+                            <label>จำนวนชิ้นงานเสีย & หน่วยนับ <span style="color:red">*</span></label>
+                            <div class="qty-unit-group">
+                                <input type="number" id="qtyInput" placeholder="จำนวน" min="1" required>
+                                <select id="unitInput" required>
+                                    <option value="ชิ้น">ชิ้น</option>
+                                    <option value="แผ่น">แผ่น</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>รายการปัญหาที่พบ (เลือกได้มากกว่า 1 ข้อ) <span style="color:red">*</span></label>
+                            <div class="problem-search-box">
+                                <input type="text" id="searchProblem" placeholder="🔍 ค้นหารายการปัญหา..." onkeyup="filterProblems()">
+                            </div>
+                            <div class="problems-container" id="problemsContainer">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="remarkInput">รายละเอียดเพิ่มเติม / หมายเหตุ</label>
+                            <textarea id="remarkInput" rows="3" placeholder="ระบุรายละเอียดเพิ่มเติม..."></textarea>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fa-solid fa-paper-plane"></i> บันทึกข้อมูล
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB 3: HISTORY -->
+        <div id="history" class="tab-content">
+            <div class="glass-card">
+                <div class="card-header-title">
+                    <i class="fa-solid fa-clock-rotate-left"></i> ประวัติรายการแจ้งปัญหาทั้งหมด
+                </div>
+
+                <div class="filter-bar">
+                    <input type="text" id="histSearchInput" placeholder="🔍 ค้นหา (เครื่องจักร, หัวหน้า, ปัญหา...)" onkeyup="renderHistoryTable()">
+                    <select id="histDeptFilter" onchange="renderHistoryTable()">
+                        <option value="">-- ทุกแผนก --</option>
+                        <option value="พิมพ์">พิมพ์</option>
+                        <option value="อาบมันรีดเงา">อาบมันรีดเงา</option>
+                        <option value="ปั๊ม">ปั๊ม</option>
+                        <option value="ทั่วไป/แกะกล่อง">ทั่วไป/แกะกล่อง</option>
+                        <option value="ขึ้นรูปกล่อง">ขึ้นรูปกล่อง</option>
+                        <option value="คลังสินค้า">คลังสินค้า</option>
+                    </select>
+
+                    <button class="export-btn" onclick="exportToCSV()">
+                        <i class="fa-solid fa-file-excel"></i> Export Excel (.csv)
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>วันที่/เวลา</th>
+                                <th>แผนก</th>
+                                <th>เครื่องจักร</th>
+                                <th>หัวหน้าเครื่อง</th>
+                                <th>ปัญหาที่พบ</th>
+                                <th>จำนวนเสีย</th>
+                                <th>จัดการ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Data Items (44 Issues)
+        const problemsList = [
+            "1. พิมพ์ไม่ตรง", "2. สีเลอะ", "3. รอยผ้ายาง", "4. สีเลอะ (ซ้ำ)", "5. รอยขูดขีดจากการดึงดูสี",
+            "6. ขี้หมึก", "7. น้ำมันกระเด็น", "8. โค๊ทไม่ได้มาตรฐาน", "9. ผิวงานไม่เงา", "10. อาบUVไม่ได้มาตรฐาน",
+            "11. Silk screenไม่ได้มาตรฐาน", "12. ปํ๊มไม่ขาด", "13. ปั๊มไม่ตรง", "14. เส้นพับแตก", "15. กล่องเป็นรอยจากปั๊ม",
+            "16. ขุยกระดาษ", "17. ปั๊มนูนไม่ตรง", "18. ปั๊มนูนร้าว,แตก", "19. งานโค่น", "20. เคไม่ติด",
+            "21. เคตัน", "22. เคไม่ตรง", "23. กาวปะกบลูกฟูกล่อน", "24. รูปแบบงานไม่ตรงตามใบสั่ง", "25. D/W ไม่ตรง",
+            "26. ไม่ทำตามระบบ", "27. กาวล่อน", "28. กาวติด", "29. เลอะคราบกาว", "30. กาวปลิ้น",
+            "31. ติดกล่องเอียง", "32. ตาไฟกันปนไม่ตัด", "33. กล้องกันปนไม่ตัด", "34. กล่องเป็นรอยจากติดกล่อง", "35. รอยกดทับจากปั๊ม",
+            "36. รอยกดทับจากติดกล่อง", "37. กล่องขาด", "38. ปรุหนัก,ร้าว, แตก", "39. เส้นปรุหาย", "40. เส้นซิปหาย",
+            "41. เส้นสีไม่ต่อ", "42. สีไม่ได้มาตรฐาน", "43. พิมพ์ Foil ไม่ติด", "44. เคเลอะ"
+        ];
+
+        // Mock Initial Data
+        const initialMockData = [
+            { id: 1, datetime: "2026-10-20 09:30", dept: "พิมพ์", machine: "พิมพ์ M1", leader: "สมชาย", problems: ["1. พิมพ์ไม่ตรง", "2. สีเลอะ"], qty: 150, unit: "แผ่น", job: "JOB-101" },
+            { id: 2, datetime: "2026-10-20 11:15", dept: "ปั๊ม", machine: "ปั๊ม P2", leader: "วิชัย", problems: ["13. ปั๊มไม่ตรง"], qty: 80, unit: "ชิ้น", job: "JOB-102" },
+            { id: 3, datetime: "2026-10-21 08:45", dept: "ขึ้นรูปกล่อง", machine: "ติดกล่อง B1", leader: "สมศักดิ์", problems: ["31. ติดกล่องเอียง", "30. กาวปลิ้น"], qty: 200, unit: "ชิ้น", job: "JOB-105" },
+            { id: 4, datetime: "2026-10-21 14:20", dept: "อาบมันรีดเงา", machine: "อาบมัน UV1", leader: "อนันต์", problems: ["9. ผิวงานไม่เงา"], qty: 300, unit: "แผ่น", job: "JOB-108" },
+            { id: 5, datetime: "2026-09-15 10:10", dept: "พิมพ์", machine: "พิมพ์ M2", leader: "สมชาย", problems: ["6. ขี้หมึก"], qty: 90, unit: "แผ่น", job: "JOB-098" }
+        ];
+
+        let reports = JSON.parse(localStorage.getItem('kimPaiReports')) || initialMockData;
+
+        // Chart Instances
+        let deptChartInstance = null;
+        let topProblemChartInstance = null;
+        let machineChartInstance = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setCurrentDatetime();
+            renderProblemCheckboxes();
+            updateDashboard();
+            renderHistoryTable();
+        });
+
+        function setCurrentDatetime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            
+            document.getElementById('datetimeInput').value = `${year}-${month}-${day}T${hours}:${minutes}`;
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            if (tabId === 'dashboard') {
+                updateDashboard();
+            }
+        }
+
+        function renderProblemCheckboxes() {
+            const container = document.getElementById('problemsContainer');
+            container.innerHTML = problemsList.map((prob, idx) => `
+                <div class="problem-item">
+                    <input type="checkbox" id="prob_${idx}" value="${prob}">
+                    <label for="prob_${idx}">${prob}</label>
+                </div>
+            `).join('');
+        }
+
+        function filterProblems() {
+            const search = document.getElementById('searchProblem').value.toLowerCase();
+            document.querySelectorAll('.problem-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(search) ? 'flex' : 'none';
+            });
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const datetimeVal = document.getElementById('datetimeInput').value;
+            const dept = document.getElementById('deptSelect').value;
+            const machine = document.getElementById('machineInput').value.trim();
+            const leader = document.getElementById('leaderInput').value.trim();
+            const job = document.getElementById('jobInput').value.trim();
+            const qty = parseInt(document.getElementById('qtyInput').value) || 0;
+            const unit = document.getElementById('unitInput').value;
+            const remark = document.getElementById('remarkInput').value.trim();
+
+            const selectedProblems = [];
+            document.querySelectorAll('#problemsContainer input[type="checkbox"]:checked').forEach(cb => {
+                selectedProblems.push(cb.value);
+            });
+
+            if (selectedProblems.length === 0) {
+                alert('กรุณาเลือกปัญหาที่พบอย่างน้อย 1 ข้อค่ะ');
+                return;
+            }
+
+            // Format datetime: YYYY-MM-DD HH:mm
+            const formattedDatetime = datetimeVal ? datetimeVal.replace('T', ' ') : new Date().toISOString().slice(0,16).replace('T', ' ');
+
+            const newReport = {
+                id: Date.now(),
+                datetime: formattedDatetime,
+                dept,
+                machine,
+                leader,
+                job,
+                qty,
+                unit,
+                remark,
+                problems: selectedProblems
+            };
+
+            reports.unshift(newReport);
+            localStorage.setItem('kimPaiReports', JSON.stringify(reports));
+
+            alert('บันทึกข้อมูลเรียบร้อยแล้วค่ะ');
+            document.getElementById('issueForm').reset();
+            setCurrentDatetime();
+            switchTab('dashboard');
+        }
+
+        function deleteReport(id) {
+            if (confirm('คุณต้องการลบรายการบันทึกนี้ใช่หรือไม่?')) {
+                reports = reports.filter(r => r.id !== id);
+                localStorage.setItem('kimPaiReports', JSON.stringify(reports));
+                renderHistoryTable();
+                updateDashboard();
+            }
+        }
+
+        function renderHistoryTable() {
+            const tbody = document.getElementById('historyTableBody');
+            const search = document.getElementById('histSearchInput').value.toLowerCase();
+            const deptFilter = document.getElementById('histDeptFilter').value;
+
+            const filtered = reports.filter(r => {
+                const matchDept = !deptFilter || r.dept === deptFilter;
+                const matchSearch = !search || 
+                    r.machine.toLowerCase().includes(search) || 
+                    r.leader.toLowerCase().includes(search) || 
+                    r.problems.some(p => p.toLowerCase().includes(search));
+                return matchDept && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:#94a3b8; padding:20px;">ไม่พบข้อมูลบันทึก</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(r => `
+                <tr>
+                    <td>${r.datetime}</td>
+                    <td><span class="badge-dept">${r.dept}</span></td>
+                    <td><strong>${r.machine}</strong></td>
+                    <td>${r.leader}</td>
+                    <td>${r.problems.join('<br>')}</td>
+                    <td><strong>${r.qty.toLocaleString()}</strong> ${r.unit || 'ชิ้น'}</td>
+                    <td>
+                        <button class="btn-delete" onclick="deleteReport(${r.id})" title="ลบรายการ">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function updateDashboard() {
+            const yearFilter = document.getElementById('dashYearFilter').value;
+            const monthFilter = document.getElementById('dashMonthFilter').value;
+            const deptFilter = document.getElementById('dashDeptFilter').value;
+
+            const filteredReports = reports.filter(r => {
+                const [datePart] = r.datetime.split(' ');
+                const [y, m] = datePart.split('-');
+                
+                const matchYear = !yearFilter || y === yearFilter;
+                const matchMonth = !monthFilter || m === monthFilter;
+                const matchDept = !deptFilter || r.dept === deptFilter;
+
+                return matchYear && matchMonth && matchDept;
+            });
+
+            const probCounts = {};
+            const deptCounts = {};
+            const machineCounts = {};
+            const leaderCounts = {};
+            const machineStats = {};
+
+            filteredReports.forEach(r => {
+                deptCounts[r.dept] = (deptCounts[r.dept] || 0) + 1;
+                machineCounts[r.machine] = (machineCounts[r.machine] || 0) + 1;
+                leaderCounts[r.leader] = (leaderCounts[r.leader] || 0) + 1;
+
+                r.problems.forEach(p => {
+                    probCounts[p] = (probCounts[p] || 0) + 1;
+                });
+
+                if (!machineStats[r.machine]) {
+                    machineStats[r.machine] = { leader: r.leader, dept: r.dept, count: 0, pcsQty: 0, sheetQty: 0 };
+                }
+                machineStats[r.machine].count += 1;
+                if (r.unit === 'แผ่น') {
+                    machineStats[r.machine].sheetQty += r.qty;
+                } else {
+                    machineStats[r.machine].pcsQty += r.qty;
+                }
+            });
+
+            // Update KPIs
+            const topProb = getTopKey(probCounts);
+            document.getElementById('kpiTopProblem').textContent = topProb ? topProb.key : '-';
+            document.getElementById('kpiTopProblemCount').textContent = topProb ? `${topProb.val} ครั้ง` : '0 ครั้ง';
+
+            const topDept = getTopKey(deptCounts);
+            document.getElementById('kpiTopDept').textContent = topDept ? topDept.key : '-';
+            document.getElementById('kpiTopDeptCount').textContent = topDept ? `${topDept.val} ครั้ง` : '0 ครั้ง';
+
+            const topMachine = getTopKey(machineCounts);
+            document.getElementById('kpiTopMachine').textContent = topMachine ? topMachine.key : '-';
+            document.getElementById('kpiTopMachineCount').textContent = topMachine ? `${topMachine.val} ครั้ง` : '0 ครั้ง';
+
+            const topLeader = getTopKey(leaderCounts);
+            document.getElementById('kpiTopLeader').textContent = topLeader ? topLeader.key : '-';
+            document.getElementById('kpiTopLeaderCount').textContent = topLeader ? `${topLeader.val} ครั้ง` : '0 ครั้ง';
+
+            // Leaderboard Table
+            const tbody = document.getElementById('machineLeaderboardBody');
+            const sortedMachines = Object.entries(machineStats).sort((a,b) => b[1].count - a[1].count);
+            
+            if (sortedMachines.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:#94a3b8; padding:15px;">ไม่มีข้อมูลตามเงื่อนไขที่เลือก</td></tr>`;
+            } else {
+                tbody.innerHTML = sortedMachines.map(([mName, stat]) => {
+                    let qtyStrArr = [];
+                    if (stat.sheetQty > 0) qtyStrArr.push(`${stat.sheetQty.toLocaleString()} แผ่น`);
+                    if (stat.pcsQty > 0) qtyStrArr.push(`${stat.pcsQty.toLocaleString()} ชิ้น`);
+                    return `
+                        <tr>
+                            <td><strong>${mName}</strong></td>
+                            <td>${stat.leader}</td>
+                            <td><span class="badge-dept">${stat.dept}</span></td>
+                            <td>${stat.count} ครั้ง</td>
+                            <td>${qtyStrArr.join(' / ') || '0'}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+
+            renderCharts(deptCounts, probCounts, machineCounts);
+        }
+
+        function getTopKey(obj) {
+            let maxKey = null;
+            let maxVal = 0;
+            for (const [key, val] of Object.entries(obj)) {
+                if (val > maxVal) {
+                    maxVal = val;
+                    maxKey = key;
+                }
+            }
+            return maxKey ? { key: maxKey, val: maxVal } : null;
+        }
+
+        function renderCharts(deptCounts, probCounts, machineCounts) {
+            // Chart 1: Machines
+            const mCtx = document.getElementById('machineChart').getContext('2d');
+            if (machineChartInstance) machineChartInstance.destroy();
+
+            const sortedMachines = Object.entries(machineCounts).sort((a,b) => b[1] - a[1]).slice(0, 7);
+            machineChartInstance = new Chart(mCtx, {
+                type: 'bar',
+                data: {
+                    labels: sortedMachines.map(m => m[0]),
+                    datasets: [{
+                        label: 'จำนวนครั้งที่เกิดปัญหา',
+                        data: sortedMachines.map(m => m[1]),
+                        backgroundColor: '#0284c7',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } }
+                }
+            });
+
+            // Chart 2: Dept Doughnut
+            const deptCtx = document.getElementById('deptChart').getContext('2d');
+            if (deptChartInstance) deptChartInstance.destroy();
+
+            deptChartInstance = new Chart(deptCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(deptCounts),
+                    datasets: [{
+                        data: Object.values(deptCounts),
+                        backgroundColor: ['#0f766e', '#0284c7', '#eab308', '#ec4899', '#8b5cf6', '#64748b']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+
+            // Chart 3: Top 10 Problems
+            const topProbCtx = document.getElementById('topProblemChart').getContext('2d');
+            if (topProblemChartInstance) topProblemChartInstance.destroy();
+
+            const sortedProbs = Object.entries(probCounts).sort((a,b) => b[1] - a[1]).slice(0, 10);
+            topProblemChartInstance = new Chart(topProbCtx, {
+                type: 'bar',
+                data: {
+                    labels: sortedProbs.map(p => p[0]),
+                    datasets: [{
+                        label: 'จำนวนครั้งที่พบ',
+                        data: sortedProbs.map(p => p[1]),
+                        backgroundColor: '#0f766e',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { beginAtZero: true, ticks: { stepSize: 1 } } }
+                }
+            });
+        }
+
+        // Export to CSV
+        function exportToCSV() {
+            if (reports.length === 0) {
+                alert('ไม่มีข้อมูลสำหรับส่งออก');
+                return;
+            }
+
+            let csvContent = "\uFEFFวันที่/เวลา,แผนก,เครื่องจักร,หัวหน้าเครื่อง,JOB,จำนวน,หน่วย,ปัญหาที่พบ,หมายเหตุ\n";
+            
+            reports.forEach(r => {
+                const problemsStr = `"${r.problems.join(', ')}"`;
+                const remarkStr = `"${(r.remark || '').replace(/"/g, '""')}"`;
+                csvContent += `${r.datetime},${r.dept},${r.machine},${r.leader},${r.job || ''},${r.qty},${r.unit || 'ชิ้น'},${problemsStr},${remarkStr}\n`;
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.setAttribute("href", url);
+            link.setAttribute("download", `รายงานปัญหา_WG6_${new Date().toISOString().slice(0,10)}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
